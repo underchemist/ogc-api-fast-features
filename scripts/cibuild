@@ -2,8 +2,10 @@
 
 set -e
 
-pip install flake8==3.9.2 mypy==0.910
+pip install flake8==3.9.2 mypy==0.910 black==21.5b1 isort==5.8.0
 cd $(dirname $0)/..
+black .
+isort .
 flake8 .
 mypy .
 scripts/test --no-cache

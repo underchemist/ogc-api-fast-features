@@ -1,29 +1,18 @@
-name: CI Tests, Build, Push to ghcr.io
+name: Build, Push to ghcr.io
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "*"
 
 env:
   DOCKER_REGISTRY: ghcr.io
   DOCKER_IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  test-api:
-    name: test-api
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Run cibuild script (build and test)
-      run: scripts/cibuild
 
   docker:
     name: docker
-    needs:
-      - test-api
     permissions:
       contents: read
       packages: write
